@@ -19,7 +19,19 @@ connectCloudinary();
 
 // middlewares
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://appointy-897l.vercel.app",
+      "https://appointy-2fd7.vercel.app",
+      process.env.FRONTEND_URL,
+      process.env.ADMIN_URL,
+    ].filter(Boolean),
+    credentials: true,
+  }),
+);
 
 // api endpoints
 app.use("/api/admin", adminRouter);
